@@ -19,7 +19,7 @@ def wordfreq(fname, stripPunc, toLower) :
 
 if __name__== '__main__':
     if len(sys.argv) < 2:
-        print("Usage: wordfreq {--strip --convert -pfile=outfile} file")
+        print("Usage: wc {--strip --convert --pfile=outfile} file")
         sys.exit(-1)
     fname = sys.argv[-1]
     strip = '--strip' in sys.argv

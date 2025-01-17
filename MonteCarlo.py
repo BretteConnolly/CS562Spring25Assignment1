@@ -26,7 +26,7 @@ def monte_carlo_approach(n) :
     for i in range(n-5,n+1) :
         win_table[i] = 0
 
-    for hold_val in (n-5,n+1) :
+    for hold_val in range(n-5,n+1) :
         for i in range(100000) :
         ## you do this part. My solution is under 20 lines of code. Yours can be longer, but if it's getting
         ## really big, take a step back and rethink.
