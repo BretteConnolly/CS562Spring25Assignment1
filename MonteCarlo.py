@@ -27,16 +27,20 @@ def monte_carlo_approach(n) :
         win_table[i] = 0
 
     for hold_val in range(n-5,n+1) :
-        for i in range(100000) :
-        ## you do this part. My solution is under 20 lines of code. Yours can be longer, but if it's getting
-        ## really big, take a step back and rethink.
-
+        for i in range(1000000) :
         ## player 1 plays
-
-
+            p1_total = 0
+            while p1_total < hold_val: #while hold value as not been reached
+                p1_total += randint(1,6) #dice roll
         ## player 1 done. Did they exceed n?
         ## if not, player 2 plays
-        ## player 2 > player1?
+            if p1_total <= n: #if p1 does not exceed the target, then player 2 plays
+                p2_total = 0
+                ## player 2 > player1?
+                while p2_total <= p1_total and p2_total < n: #player 2 wants to exceed player 1, but not exceed the target
+                    p2_total += randint(1,6) #dice roll
+                if p2_total > n: #player 2 exceeds the target
+                    win_table[hold_val] += 1 #player 1 wins
 
     for item in win_table.keys() :
         print("%d: %f" % (item, win_table[item]/1000000))
