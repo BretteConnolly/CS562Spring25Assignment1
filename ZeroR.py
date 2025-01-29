@@ -8,20 +8,22 @@ from random import choices
 
 def zeroR(list_of_examples) :
     classification_table = {}
-    for item in data:
-        classification = item.strip().split(",")[-1] #Strips the  newline character, separates CSV by commas, takes the last value
+    for example in list_of_examples:
+        classification = example.strip().split(",")[-1] #Strips the  newline character, separates CSV by commas, takes the last value
         if classification not in classification_table:
             classification_table[classification] = 1
         else:
             classification_table[classification] += 1
-
     return max(classification_table, key=classification_table.get)
 ### assume that list_of_examples is a list of strings. For example:
 ### ['outlook,temperature,humidity,windy,play\n', 'sunny,hot,high,FALSE,no\n', 'sunny,hot,high,TRUE,no\n', 'overcast,hot,high,FALSE,yes\n', 'rainy,mild,high,FALSE,yes\n', 'rainy,cool,normal,FALSE,yes\n', 'rainy,cool,normal,TRUE,no\n', 'overcast,cool,normal,TRUE,yes\n', 'sunny,mild,high,FALSE,no\n', 'sunny,cool,normal,FALSE,yes\n', 'rainy,mild,normal,FALSE,yes\n', 'sunny,mild,normal,TRUE,yes\n', 'overcast,mild,high,TRUE,yes\n', 'overcast,hot,normal,FALSE,yes\n', 'rainy,mild,high,TRUE,no\n']
 ### your code should get the last element in each string, which is the classification, and use random.choice() to select one and return it
 
 def randR(list_of_examples) :
-    return "randR" # you fix this.
+    list_of_classifications = []
+    for example in list_of_examples:
+        list_of_classifications.append(example.strip().split(",")[-1])
+    return choices(list_of_classifications)
 
 
 
