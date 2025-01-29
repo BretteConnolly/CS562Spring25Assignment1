@@ -21,8 +21,8 @@ def zeroR(list_of_examples) :
 
 def randR(list_of_examples) :
     list_of_classifications = []
-    for example in list_of_examples:
-        list_of_classifications.append(example.strip().split(",")[-1])
+    for i in range(1, len(list_of_examples)):
+        list_of_classifications.append(list_of_examples[i].strip().split(",")[-1])
     return choices(list_of_classifications)
 
 
