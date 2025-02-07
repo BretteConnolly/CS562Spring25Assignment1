@@ -1,3 +1,5 @@
+#Brette Fitzgibbon
+
 from random import randint
 
 # MonteCarlo.py
@@ -41,6 +43,7 @@ def monte_carlo_approach(n) :
                     p2_total += randint(1,6) #dice roll
                 if p2_total > n: #player 2 exceeds the target
                     win_table[hold_val] += 1 #player 1 wins
+                #If player 1 and player 2 tie at the target, nobody wins
 
     for item in win_table.keys() :
         print("%d: %f" % (item, win_table[item]/1000000))

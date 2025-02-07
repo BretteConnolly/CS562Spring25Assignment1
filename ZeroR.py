@@ -1,3 +1,5 @@
+#Brette Fitzgibbon
+
 import sys
 from random import choices
 

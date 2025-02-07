@@ -1,3 +1,5 @@
+#Brette Fitzgibbon
+
 import argparse
 import os
 import pickle
@@ -33,7 +35,7 @@ if __name__== '__main__':
     parser.add_argument("--save", type=str)
     args = parser.parse_args()
 
-    #print(wordfreq("submission.py"))
+    print(wordfreq("submission.py"))
 
     combined_word_freq = {}
     if os.path.isdir(args.fname):
