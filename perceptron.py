@@ -1,57 +1,59 @@
-import random
+from random import random
 
-## for each element, the first six items are the input, and the last is the
-## expected output.
+def get_total(example, weights, bias):
+    total = 0
+    for i in range(len(example) - 1):
+        total += example[i] * weights[i] + bias
+    return total
 
-training_examples = [
-    [1, 0, 1, 0, 0, 0, 1],
-    [1, 0, 1, 1, 0, 0, 1],
-    [1, 0, 1, 0, 1, 0, 1],
-    [1, 1, 0, 0, 1, 1, 1],
-    [1, 1, 1, 1, 0, 0, 1],
-    [1, 0, 0, 0, 1, 1, 1],
-    [1, 0, 0, 0, 1, 0, 0],
-    [0, 1, 1, 1, 0, 1, 1],
-    [0, 1, 1, 0, 1, 1, 0],
-    [0, 0, 0, 1, 1, 0, 0],
-    [0, 1, 0, 1, 0, 1, 0],
-    [0, 0, 0, 1, 0, 1, 0],
-    [0, 1, 1, 0, 1, 1, 0],
-    [0, 1, 1, 1, 0, 0, 0],
-]
-
-def threshold(val) :
+def threshold(val):
     if val < 0 :
         return 0
     else :
         return 1
 
+def convergence_test(errors):
+    for error in errors:
+        if error != 0:
+            return False
+    return True
+
 def perceptron_training() :
+    training_examples = [
+        [1, 0, 1, 0, 0, 0, 1],
+        [1, 0, 1, 1, 0, 0, 1],
+        [1, 0, 1, 0, 1, 0, 1],
+        [1, 1, 0, 0, 1, 1, 1],
+        [1, 1, 1, 1, 0, 0, 1],
+        [1, 0, 0, 0, 1, 1, 1],
+        [1, 0, 0, 0, 1, 0, 0],
+        [0, 1, 1, 1, 0, 1, 1],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 0, 0, 1, 1, 0, 0],
+        [0, 1, 0, 1, 0, 1, 0],
+        [0, 0, 0, 1, 0, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 1, 1, 1, 0, 0, 0],
+    ]
+
     alpha = 0.1
     bias = -0.1
-    weights = [0] * 6
-    ## each weight will be between -0.05 and 0.05
-    for i in range(5) :
-        weights[i] = (random.random() / 10) - 0.05
+    weights = []
+    for i in range(len(training_examples[0]) - 1):
+        weights.append(random() / 10 - 0.05)
 
     converged = False
-    while not converged :
-        converged = True
-        for example in training_examples :
-            ## you complete this part.
-            ## first, compute actual output
+    while not converged:
+        errors = []
+        for example in training_examples:
+            total = get_total(example, weights, bias)
+            output = threshold(total)
+            expected = example[-1]
+            error = expected - output
+            errors.append(error)
+            if error != 0:
+                for i in range(len(example) - 1):
+                    weights[i] += alpha * error * example[i]
+        converged = convergence_test(errors)
 
-
-            ## next, update weights
-
-
-    ## print results
-    for example in training_examples :
-        total = bias
-        inputs = example[:-1]
-        for i in range(len(inputs)):
-            total += weights[i] * inputs[i]
-        output = threshold(total)
-        print(f"Expected: {inputs[-1]} Actual: {output}")
-
-perceptron_training()
+    print("Final weights: ", weights)
